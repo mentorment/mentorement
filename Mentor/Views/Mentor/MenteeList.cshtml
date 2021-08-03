@@ -1,0 +1,107 @@
+﻿@*@model List<Mentor.BE.MenteeListBE>*@
+
+@model PagedList.IPagedList<Mentor.BE.MenteeListBE>
+
+@using PagedList.Mvc;
+@*@using PagedList;*@
+@using Mentor.Models
+@using Mentor.BE
+@{
+    ViewBag.Title = "MenteeList";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="javascript:void(0);" id="toggle_btn">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row row-grid">
+
+                    @*@foreach (MenteeListBE item in (List<MenteeListBE>)ViewBag.List)*@
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="card widget-profile user-widget-profile">
+                                <div class="card-body">
+                                    <div class="pro-widget-content">
+                                        <div class="profile-info-widget">
+                                            <a href="profile-mentee.html" class="booking-user-img">
+                                                <img src="~/assets/img/user/user.jpg" alt="User Image">
+
+                                            </a>
+                                            <div class="profile-det-info">
+                                                <h3><a href="profile-mentee.html">@item.Name</a></h3>
+
+                                                <div class="mentee-details">
+                                                    <h5><b></b></h5>
+                                                    <h5 class="mb-0"><i class=" "></i>@item.CategoryName,@item.SubCategoryName</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mentee-info" style="background-color:Menu">
+                                        <ul>
+                                            <li>Rate Per Hour <span>@item.PerHourRate</span></li>
+                                            <li>Phone <span>@item.PhoneNum</span></li>
+
+                                            <li>Interest <span></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+                <div class="blog-pagination mt-4">
+                    <nav>
+                        <ul class="pagination justify-content-center">
+
+                            <li class="page-item">
+                                @*Page   @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                    of*@   <!--@Model.PageCount-->
+                                @Html.PagedListPager(Model, page => Url.Action("MenteeList", new { page }))
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+                @*@{
+                        double totalPages = ViewBag.TotalPages;
+
+                        for (int i = 0; i < totalPages; i++)
+                        {
+
+
+
+                            <div class="blog-pagination mt-4">
+                                <nav>
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-double-left"></i></a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">@i</a>
+                                            @Html.Action(i.ToString(),"MenteeList", new { List = ViewBag.List == null ? "Asc" : ViewBag.List, PageNumber = i });
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        }
+                    }*@
+
+            </div>
+        </div>
+    </div>
+</div>
